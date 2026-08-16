@@ -13,7 +13,59 @@ non-commercial loading screen project called **ECHO VOID**.
 | `Monsters/Bosses/`    | 10 boss monster spine sets                                           |
 | `Maps/`               | 1 curated battle/dungeon background (PNG)                            |
 | `Loading/`            | `loading.html` - the ECHO VOID branded loading screen (assets only)  |
+| `UI/`                 | UI textures, icons and module prefab references (see below)          |
 | `ASSET_MANIFEST.json` | Machine-readable mapping of asset IDs to creative names and types    |
+
+## UI Assets
+
+UI assets are curated from the game's UI resources and reorganized by use.
+All names in this folder are original to this pack (not the original file
+names) so they can be dropped into your own game.
+
+### UI/Textures (screens & elements)
+
+| Subfolder     | Contents                                                                 |
+|---------------|--------------------------------------------------------------------------|
+| `_top_level`  | Core UI elements: boxes, frames, buttons, item frames, HP bars, mileage  |
+| `Shop`        | Shop background and gold-dust package art (EN variants)                  |
+| `Inventory`   | Item frames/backgrounds shared with shop screens                         |
+| `Result`      | Battle result / victory decorations                                      |
+| `Loading`     | Loading screens (world, arena, shop, world boss, ...)                    |
+| `Arena`       | PvP backgrounds, emblems, vs screens                                     |
+| `Intro`       | Logos and title loading background                                       |
+| `WorldClear`  | World-clear background art                                               |
+| `Event`       | Event banner / image art (EN variants)                                   |
+| `Staking`     | Staking mob art                                                          |
+| `Synopsis`    | Prologue / story illustration art                                        |
+| `TitleFrames` | Title frame icons                                                        |
+| `Tooltip`     | Navigation tooltip background                                            |
+
+### UI/Icons
+
+| Subfolder             | Count | Contents                                   |
+|-----------------------|-------|--------------------------------------------|
+| `Character`           | 32    | Character costume + monster icons          |
+| `BigCharacter`        | 4     | Large boss artwork (bosses only)           |
+| `Item`                | 228   | Curated item icons (premium grade 5+)      |
+| `FungibleAssetValue`  | 62    | Currencies: NCG, Crystal, AP, Hourglass, runes |
+| `Buff`                | 31    | Buff / debuff status icons                 |
+| `Skill`               | 15    | Boss skill icons (Fenrir, Serimnir)        |
+| `ElementalType`       | 5     | Normal / Fire / Water / Land / Wind        |
+| `Navigation`          | 26    | Menu navigation icons                      |
+| `System`              | 5     | Popup / system icons                       |
+| `Mail`                | 9     | Mail category icons                        |
+
+Item icons were curated from the full game set (983 icons) down to the
+important premium items only: grade 5+ materials and monster parts,
+legendary consumables, grade 6+ equipment, and core currencies. The full
+list lives in `ASSET_MANIFEST.json` under `ui.icons.Item` (228 items).
+
+### UI/Modules
+
+Unity prefab references for the main game screens (Shop, Inventory,
+ItemInformation, ShopShelf, EnhancementInventory, MaterialItemsGrid,
+GrindModule, ...). These are Unity `.prefab` files kept as structural
+reference for your own UI implementation.
 
 ## Characters (3)
 
