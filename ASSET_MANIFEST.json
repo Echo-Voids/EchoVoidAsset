@@ -1,0 +1,135 @@
+{
+  "characters": {
+    "40100000": {
+      "name": "Valkyrie of the Void"
+    },
+    "40100001": {
+      "name": "Dawn Lion"
+    },
+    "40100002": {
+      "name": "Hela's Phantom"
+    }
+  },
+  "monsters": {
+    "201000": {
+      "name": "Yggdrasil Seed",
+      "type": "regular"
+    },
+    "201001": {
+      "name": "Yggdrasil Sprout",
+      "type": "regular"
+    },
+    "201003": {
+      "name": "Yggdrasil Bloom",
+      "type": "regular"
+    },
+    "201005": {
+      "name": "Yggdrasil Seedling",
+      "type": "regular"
+    },
+    "201007": {
+      "name": "Spore Shroom",
+      "type": "regular"
+    },
+    "201008": {
+      "name": "Yggdrasil Thicket",
+      "type": "regular"
+    },
+    "202000": {
+      "name": "Foxkin Grunt",
+      "type": "regular"
+    },
+    "202003": {
+      "name": "Foxkin Warrior",
+      "type": "regular"
+    },
+    "202007": {
+      "name": "Kitsune Chieftain",
+      "type": "boss"
+    },
+    "203000": {
+      "name": "Boarkin Grunt",
+      "type": "regular"
+    },
+    "203003": {
+      "name": "Boarkin Warrior",
+      "type": "regular"
+    },
+    "203007": {
+      "name": "Serimnir, Boar King",
+      "type": "boss"
+    },
+    "204000": {
+      "name": "Yggdrasil Sludge",
+      "type": "regular"
+    },
+    "204020": {
+      "name": "Yggdrasil Sludge",
+      "type": "regular"
+    },
+    "205000": {
+      "name": "Wind Squire",
+      "type": "regular"
+    },
+    "205004": {
+      "name": "Gale Gazelle",
+      "type": "regular"
+    },
+    "205007": {
+      "name": "Fenrir, Wind Devourer",
+      "type": "boss"
+    },
+    "206000": {
+      "name": "Mottled Lizard",
+      "type": "regular"
+    },
+    "206003": {
+      "name": "Lizard Brute",
+      "type": "regular"
+    },
+    "206007": {
+      "name": "Surtr, Flame Lord",
+      "type": "boss"
+    },
+    "207001": {
+      "name": "Troll Digger",
+      "type": "regular"
+    },
+    "207007": {
+      "name": "Laufey, Frost Matriarch",
+      "type": "boss"
+    },
+    "208001": {
+      "name": "Frost Boar",
+      "type": "regular"
+    },
+    "208007": {
+      "name": "Jormungandr, World Serpent",
+      "type": "boss"
+    },
+    "209001": {
+      "name": "Ganglöt",
+      "type": "regular"
+    },
+    "209007": {
+      "name": "Hera, Queen of Hel",
+      "type": "boss"
+    },
+    "210007": {
+      "name": "World 9 Wraith",
+      "type": "regular"
+    },
+    "211000": {
+      "name": "Surtr, Ashen Avatar",
+      "type": "boss"
+    },
+    "900001": {
+      "name": "Fenrir, World Eater",
+      "type": "boss"
+    },
+    "900002": {
+      "name": "Serimnir, Worldbreaker",
+      "type": "boss"
+    }
+  }
+}

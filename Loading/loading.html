@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECHO VOID - Loading</title>
+<style>
+  :root {
+    --void-bg: #05060a;
+    --void-panel: #0b0e17;
+    --void-line: #1b2333;
+    --void-cyan: #35e0e0;
+    --void-magenta: #b045ff;
+    --void-text: #c9d4e8;
+    --void-dim: #5f6b85;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    background: var(--void-bg);
+    color: var(--void-text);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  #stage {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Background layers */
+  .bg-layer { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.2s ease; }
+  .bg-layer.active { opacity: 0.28; }
+  .bg-layer .scrim { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(5,6,10,0.55) 0%, rgba(5,6,10,0.92) 100%); }
+
+  .panel {
+    position: relative;
+    width: min(880px, 92vw);
+    padding: 40px 48px 34px;
+    background: linear-gradient(160deg, rgba(11,14,23,0.92), rgba(8,10,16,0.96));
+    border: 1px solid var(--void-line);
+    border-radius: 14px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    overflow: hidden;
+  }
+  .panel::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--void-cyan), var(--void-magenta), transparent);
+  }
+
+  .brand {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .brand .title {
+    font-size: 46px;
+    font-weight: 800;
+    letter-spacing: 14px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--void-cyan), #7ee8f0, var(--void-magenta));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 0 18px rgba(53,224,224,0.35));
+  }
+  .brand .subtitle {
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--void-dim);
+  }
+
+  .preview {
+    position: relative;
+    height: 210px;
+    margin-bottom: 26px;
+    border: 1px solid var(--void-line);
+    border-radius: 10px;
+    background: #080a11;
+    overflow: hidden;
+  }
+  .preview .slot {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .preview .slot.active { opacity: 1; transform: scale(1); }
+  .preview .slot img { max-height: 100%; max-width: 100%; image-rendering: auto; }
+  .preview .slot .label {
+    position: absolute;
+    left: 12px; bottom: 10px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--void-dim);
+    background: rgba(5,6,10,0.7);
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+
+  .hud {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: end;
+  }
+  .hud .meta { font-size: 12px; color: var(--void-dim); letter-spacing: 1px; }
+  .hud .meta b { color: var(--void-cyan); font-weight: 600; }
+
+  .bar {
+    grid-column: 1 / -1;
+    margin-top: 18px;
+    height: 6px;
+    background: #121722;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar .fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--void-cyan), var(--void-magenta));
+    box-shadow: 0 0 12px rgba(53,224,224,0.6);
+    transition: width 0.3s ease;
+  }
+  .status {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--void-dim);
+  }
+  .status .pct { color: var(--void-cyan); }
+
+  /* Animated scanlines */
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0 1px, transparent 1px 3px);
+    mix-blend-mode: overlay;
+  }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="panel scanlines">
+  <div class="brand">
+    <div class="title">ECHO VOID</div>
+    <div class="subtitle">Entering the Void</div>
+  </div>
+
+  <div class="preview" id="preview">
+    <div class="slot"><img src="" alt=""><div class="label"></div></div>
+  </div>
+
+  <div class="hud">
+    <div class="meta" id="meta">INITIALIZING ASSET STREAM&hellip;</div>
+    <div class="meta" id="count">0 / 13</div>
+  </div>
+
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <div class="status"><span id="state">BOOTING</span> &mdash; <span class="pct" id="pct">0%</span></div>
+</div>
+
+<script>
+  var ASSETS = {
+  characters: [
+    { id: "40100000", name: "Valkyrie of the Void", src: "../Characters/40100000_Valkyrie_of_the_Void/40100000.png" },
+    { id: "40100001", name: "Dawn Lion", src: "../Characters/40100001_Dawn_Lion/40100001.png" },
+    { id: "40100002", name: "Hela's Phantom", src: "../Characters/40100002_Hela_s_Phantom/40100002.png" },
+  ],
+  regular: [
+    { id: "201000", name: "Yggdrasil Seed", src: "../Monsters/Regular/201000_Yggdrasil_Seed/201000.png" },
+    { id: "201001", name: "Yggdrasil Sprout", src: "../Monsters/Regular/201001_Yggdrasil_Sprout/201001.png" },
+    { id: "201003", name: "Yggdrasil Bloom", src: "../Monsters/Regular/201003_Yggdrasil_Bloom/201003.png" },
+    { id: "201005", name: "Yggdrasil Seedling", src: "../Monsters/Regular/201005_Yggdrasil_Seedling/201005.png" },
+    { id: "201007", name: "Spore Shroom", src: "../Monsters/Regular/201007_Spore_Shroom/201007.png" },
+    { id: "201008", name: "Yggdrasil Thicket", src: "../Monsters/Regular/201008_Yggdrasil_Thicket/201008.png" },
+    { id: "202000", name: "Foxkin Grunt", src: "../Monsters/Regular/202000_Foxkin_Grunt/202000.png" },
+    { id: "202003", name: "Foxkin Warrior", src: "../Monsters/Regular/202003_Foxkin_Warrior/202003.png" },
+    { id: "203000", name: "Boarkin Grunt", src: "../Monsters/Regular/203000_Boarkin_Grunt/203000.png" },
+    { id: "203003", name: "Boarkin Warrior", src: "../Monsters/Regular/203003_Boarkin_Warrior/203003.png" },
+    { id: "204000", name: "Yggdrasil Sludge", src: "../Monsters/Regular/204000_Yggdrasil_Sludge/204000.png" },
+    { id: "204020", name: "Yggdrasil Sludge", src: "../Monsters/Regular/204020_Yggdrasil_Sludge/204020.png" },
+    { id: "205000", name: "Wind Squire", src: "../Monsters/Regular/205000_Wind_Squire/205000.png" },
+    { id: "205004", name: "Gale Gazelle", src: "../Monsters/Regular/205004_Gale_Gazelle/205004.png" },
+    { id: "206000", name: "Mottled Lizard", src: "../Monsters/Regular/206000_Mottled_Lizard/206000.png" },
+    { id: "206003", name: "Lizard Brute", src: "../Monsters/Regular/206003_Lizard_Brute/206003.png" },
+    { id: "207001", name: "Troll Digger", src: "../Monsters/Regular/207001_Troll_Digger/207001.png" },
+    { id: "208001", name: "Frost Boar", src: "../Monsters/Regular/208001_Frost_Boar/208001.png" },
+    { id: "209001", name: "Gangl\u00f6t", src: "../Monsters/Regular/209001_Ganglöt/209001.png" },
+    { id: "210007", name: "World 9 Wraith", src: "../Monsters/Regular/210007_World_9_Wraith/210007.png" },
+  ],
+  bosses: [
+    { id: "202007", name: "Kitsune Chieftain", src: "../Monsters/Bosses/202007_Kitsune_Chieftain/202007.png" },
+    { id: "203007", name: "Serimnir, Boar King", src: "../Monsters/Bosses/203007_Serimnir_Boar_King/203007.png" },
+    { id: "205007", name: "Fenrir, Wind Devourer", src: "../Monsters/Bosses/205007_Fenrir_Wind_Devourer/205007.png" },
+    { id: "206007", name: "Surtr, Flame Lord", src: "../Monsters/Bosses/206007_Surtr_Flame_Lord/206007.png" },
+    { id: "207007", name: "Laufey, Frost Matriarch", src: "../Monsters/Bosses/207007_Laufey_Frost_Matriarch/207007.png" },
+    { id: "208007", name: "Jormungandr, World Serpent", src: "../Monsters/Bosses/208007_Jormungandr_World_Serpent/208007.png" },
+    { id: "209007", name: "Hera, Queen of Hel", src: "../Monsters/Bosses/209007_Hera_Queen_of_Hel/209007.png" },
+    { id: "211000", name: "Surtr, Ashen Avatar", src: "../Monsters/Bosses/211000_Surtr_Ashen_Avatar/211000.png" },
+    { id: "900001", name: "Fenrir, World Eater", src: "../Monsters/Bosses/900001_Fenrir_World_Eater/900001.png" },
+    { id: "900002", name: "Serimnir, Worldbreaker", src: "../Monsters/Bosses/900002_Serimnir_Worldbreaker/900002.png" },
+  ],
+  maps: [
+    { id: "map", name: "ECHO VOID DUNGEON", src: "../Maps/bg_dungeon_01.png" },
+  ]
+};
+
+  var ALL = ASSETS.characters.concat(ASSETS.regular).concat(ASSETS.bosses).concat(ASSETS.maps);
+  var current = 0;
+  var progress = 0;
+  var loading = true;
+
+  // Preload all images
+  var loadedCount = 0;
+  ALL.forEach(function (item) {
+    var img = new Image();
+    img.onload = img.onerror = function () {
+      loadedCount++;
+      progress = Math.round((loadedCount / ALL.length) * 100);
+    };
+    img.src = item.src;
+  });
+
+  var fill = document.getElementById("fill");
+  var pct = document.getElementById("pct");
+  var countEl = document.getElementById("count");
+  var stateEl = document.getElementById("state");
+  var metaEl = document.getElementById("meta");
+
+  function setState(text) { stateEl.textContent = text; }
+  function render() {
+    var item = ALL[current];
+    var slot = document.querySelector("#preview .slot");
+    var img = slot.querySelector("img");
+    var label = slot.querySelector(".label");
+    img.src = item.src;
+    label.textContent = item.name;
+    slot.classList.remove("active");
+    setTimeout(function () { slot.classList.add("active"); }, 30);
+
+    countEl.textContent = (current + 1) + " / " + ALL.length;
+    metaEl.innerHTML = "STREAMING <b>" + item.name + "</b>";
+  }
+
+  // Simulated boot cycle, then idle loop that cycles through assets
+  var bootSteps = [
+    [15, "CALIBRATING VOID"],
+    [35, "DECRYPTING SIGNAL"],
+    [55, "LOADING ENTITIES"],
+    [75, "STABILIZING FIELD"],
+    [92, "SYNCING CHRONICLES"]
+  ];
+  var step = 0;
+
+  function boot() {
+    if (step < bootSteps.length) {
+      var t = bootSteps[step];
+      var target = Math.max(t[0], progress);
+      setState(t[1]);
+      animateTo(target, function () { step++; setTimeout(boot, 260); });
+    } else {
+      loading = false;
+      setState("CONNECTED");
+      setTimeout(idleLoop, 700);
+    }
+  }
+
+  function animateTo(target, cb) {
+    function tick() {
+      fill.style.width = target + "%";
+      pct.textContent = target + "%";
+      if (target >= 100) { cb(); return; }
+      setTimeout(cb, 40);
+    }
+    tick();
+  }
+
+  function idleLoop() {
+    setInterval(function () {
+      current = (current + 1) % ALL.length;
+      render();
+      // subtle progress shimmer on idle
+      fill.style.width = (65 + Math.floor(Math.random() * 30)) + "%";
+      pct.textContent = "STANDBY";
+    }, 2400);
+  }
+
+  // Start
+  render();
+  setTimeout(boot, 400);
+</script>
+</body>
+</html>
