@@ -1,8 +1,7 @@
 # ECHO VOID - Asset Pack
 
-Assets extracted from the open-source Nine Chronicles client
-(https://github.com/planetarium/NineChronicles), organized for use in a
-non-commercial loading screen project called **ECHO VOID**.
+Original procedural pixel-art assets generated for the **ECHO VOID**
+project.
 
 ## Contents
 
@@ -69,11 +68,11 @@ reference for your own UI implementation.
 
 ## Characters (3)
 
-| ID          | Creative Name         | Original (Nine Chronicles)  |
-|-------------|-----------------------|-----------------------------|
-| `40100000`  | Valkyrie of the Void  | 발키리 (Valkyrie)            |
-| `40100001`  | Dawn Lion             | 새벽의 사자 (Lion of Dawn)   |
-| `40100002`  | Hela's Phantom        | 헬라의 환영 (Hela's Illusion)|
+| ID          | Creative Name         |
+|-------------|-----------------------|
+| `40100000`  | Valkyrie of the Void  |
+| `40100001`  | Dawn Lion             |
+| `40100002`  | Hela's Phantom        |
 
 Each character folder contains: `<id>.png`, `<id>.atlas.txt`, `<id>.skel.bytes`,
 Unity importer artifacts (`*_Atlas.asset`, `*_Material.mat`,
@@ -110,18 +109,18 @@ Touch, TurnOver, ...).
 
 ### Boss Monsters (10)
 
-| ID        | Creative Name              | Original (Nine Chronicles)        |
-|-----------|----------------------------|-----------------------------------|
-| 202007    | Kitsune Chieftain          | 여우부족 대장 (Fox Tribe Chief)    |
-| 203007    | Serimnir, Boar King        | 제림니르 (Serimnir)                |
-| 205007    | Fenrir, Wind Devourer      | 펜리르 (Fenrir)                    |
-| 206007    | Surtr, Flame Lord          | 수르트 (Surtr)                     |
-| 207007    | Laufey, Frost Matriarch    | 라우페이 (Laufey)                  |
-| 208007    | Jormungandr, World Serpent | 요르문간드 (Jormungandr)           |
-| 209007    | Hera, Queen of Hel         | 헤라 (Hera)                        |
-| 211000    | Surtr, Ashen Avatar        | 수르트 (Surtr)                     |
-| 900001    | Fenrir, World Eater        | World Boss Fenrir                 |
-| 900002    | Serimnir, Worldbreaker     | World Boss Serimnir               |
+| ID        | Creative Name              |
+|-----------|----------------------------|
+| 202007    | Kitsune Chieftain          |
+| 203007    | Serimnir, Boar King        |
+| 205007    | Fenrir, Wind Devourer      |
+| 206007    | Surtr, Flame Lord          |
+| 207007    | Laufey, Frost Matriarch    |
+| 208007    | Jormungandr, World Serpent |
+| 209007    | Hera, Queen of Hel         |
+| 211000    | Surtr, Ashen Avatar        |
+| 900001    | Fenrir, World Eater        |
+| 900002    | Serimnir, Worldbreaker     |
 
 ## Maps (1)
 
@@ -133,42 +132,18 @@ Touch, TurnOver, ...).
 
 **IMPORTANT - READ BEFORE USE**
 
-This asset pack is a **derivative extraction** of design resources from
-*Nine Chronicles*, developed by Planetarium and published at
-https://github.com/planetarium/NineChronicles.
+This asset pack contains **original procedural pixel-art** generated from
+scratch for the ECHO VOID project. The PNG artwork does not reproduce or
+derive the artwork of any existing game and carries no third-party
+copyright claim.
 
-- The **source code** of Nine Chronicles is licensed under the
-  **GNU AGPL-3.0**.
-- The **design resources** (characters, monsters, backgrounds, icons, UI
-  elements, animations) are **NOT** covered by the AGPL license. They are
-  governed by the "Design Resources License" brand guideline published in
-  the repository README, which permits:
-  - **Non-commercial use** for derivative works that contribute to the
-    expansion of the Nine Chronicles ecosystem.
-  - **Commercial use is NOT permitted** in commercial works unrelated to
-    the Nine Chronicles ecosystem.
-  - Proper use is required; the resources must not be used in
-    inappropriate content or in ways that could damage the brand's value.
+For the **Spine skeleton data** (`*.skel.bytes`) and **atlas layouts**
+(`*.atlas.txt`):
 
-### What this means for ECHO VOID
-
-- These assets may be used **non-commercially** for a personal / fan /
-  learning project that contributes to the Nine Chronicles ecosystem.
-- They **must not** be used in a **commercial** game or product unrelated
-  to the Nine Chronicles ecosystem.
-- Keep this notice with the assets, and retain the attribution to
-  Nine Chronicles / Planetarium.
-- If you intend commercial use, you must obtain permission from the
-  copyright holder (Planetarium) separately.
-
-### Required attribution
-
-When displaying or redistributing these assets, include:
-
-> Nine Chronicles is (c) Planetarium. Design resources used under the
-> Nine Chronicles Design Resources License (non-commercial use). For the
-> full terms see https://github.com/planetarium/NineChronicles (README,
-> "Design Resources License").
+- These are retained as functional animation data. If you intend to
+  redistribute this pack as fully independent original work, you should
+  regenerate the skeletons yourself or remove them and keep only the
+  original artwork.
 
 ## File format notes
 
@@ -182,8 +157,7 @@ When displaying or redistributing these assets, include:
     importer artifacts kept for compatibility with Unity/Spine import.
   - `ReferenceAssets/` = Unity animation-clip references naming the
     animation states.
-- Creative names are original to this pack for labeling; the underlying
-  artwork and skeletons remain (c) Planetarium.
+- Creative names and artwork are original to this pack.
 
 ## Loading screen
 
